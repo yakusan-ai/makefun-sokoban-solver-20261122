@@ -72,6 +72,7 @@ function search(b,boxes,goals,start,cap){
       const h=heuristic(bs);if(h>=1000000)continue;
       const region=walk(b,bs,p),key=bs.join(',')+':'+region.canon,g=cur.g+1;
       if((best.get(key)??Infinity)<=g)continue;
+      if(!best.has(key)&&best.size>=cap)return null;
       best.set(key,g);put({bs,p,g,h,key,parent:cur,move:[p,di],order:serial++});
     }
   }return null;
